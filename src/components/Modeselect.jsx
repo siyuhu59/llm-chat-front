@@ -2,10 +2,10 @@ import { useState } from "react";
 
 import * as S from "../styles/modeSelect.style";
 
-const ModeSelect = () => {
+const ModeSelect = ({model, setModel, key, setKey}) => {
 
   const [hide, setHide] = useState(false);
-  const [model, setModel] = useState("ollama");
+  // const [model, setModel] = useState("ollama");
 
   const handleHide = () => {
     setHide(!hide);
@@ -13,6 +13,10 @@ const ModeSelect = () => {
 
   const handleModelChange = (e) => {
     setModel(e.target.value);
+  }
+
+  const handleKey = (e) => {
+    setKey(e.target.value);
   }
 
   return (
@@ -28,7 +32,7 @@ const ModeSelect = () => {
       <S.InputAPIKeyContainer>
         <S.Label>OpenAI API Key</S.Label>
         <div>
-          <S.InputAPIKey type={hide ? "password" : "text"} disabled={model === "gpt4o" ? false : true} />
+          <S.InputAPIKey type={hide ? "password" : "text"} disabled={model === "gpt4o" ? false : true} value={key} onChange={handleKey}/>
           <S.HideButton onClick={handleHide}>{hide ? "Show" : "Hide"}</S.HideButton>
         </div>
       </S.InputAPIKeyContainer>

@@ -1,46 +1,81 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import usePost from "../hooks/usePost";
 
 import Message from "./Message";
 import Answer from "./Answer";
 
 import * as S from "../styles/main.style";
 
-const Main = () => {
+const Main = ({apiKey, model}) => {
 
   const [inputValue, setInputValue] = useState("");
+  const { data, error, isLoading, post } = usePost('http://127.0.0.1:8088/question_button');
+  const [postBody, setPostBody] = useState({
+    llm: "ollama",
+    question: "",
+    key: "None",
+    id: "None"
+  });
+
+  const [messages, setMessages] = useState([]);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
   }
 
+  const sendQuestion = (e) => {
+    e.preventDefault();
+    setMessages([...messages, {
+      type: "q",
+      messages: inputValue
+    }])
+    post(postBody)
+  }
+
+  const parseMessage = () => {
+    return messages.map((item) => {
+      return (
+        item.type === "q" ?
+        <Message message={{text: item.message}} /> :
+        <Answer answer={{text: item.message, source: item.source}} />
+      )
+    })
+  }
+
+  useEffect(()=>{
+    setPostBody({
+      ...setPostBody,
+      llm: model,
+      question: inputValue,
+      key: apiKey
+    })
+
+  }, [inputValue, model, apiKey])
+
+  useEffect(()=>{
+    if(data) {
+      console.log(data);
+      setMessages([...messages, {
+        type:"a",
+        message: data.answer,
+        source: data.source
+      }])
+    }
+  }, [data]);
+
+
+
   return (
     <S.MainContainer>
       <S.ChatContainer>
-        <div>
-          <Message message={{ text: "안녕하세요" }} />
-          <Answer answer={{ text: "\"안녕하세요\"는 대한민국에서 사용되는 흔한 인삿말입니다.", source: "네이버" }} />
-          <Message message={{ text: "안녕하세요" }} />
-          <Answer answer={{ text: "\"안녕하세요\"는 대한민국에서 사용되는 흔한 인삿말입니다.", source: "네이버" }} />
-          <Message message={{ text: "안녕하세요" }} />
-          <Answer answer={{ text: "\"안녕하세요\"는 대한민국에서 사용되는 흔한 인삿말입니다.", source: "네이버" }} />
-          <Message message={{ text: "안녕하세요" }} />
-          <Answer answer={{ text: "\"안녕하세요\"는 대한민국에서 사용되는 흔한 인삿말입니다.", source: "네이버" }} />
-          <Message message={{ text: "안녕하세요" }} />
-          <Answer answer={{ text: "\"안녕하세요\"는 대한민국에서 사용되는 흔한 인삿말입니다.", source: "네이버" }} />
-          <Message message={{ text: "안녕하세요" }} />
-          <Answer answer={{ text: "\"안녕하세요\"는 대한민국에서 사용되는 흔한 인삿말입니다.", source: "네이버" }} />
-          <Message message={{ text: "안녕하세요" }} />
-          <Answer answer={{ text: "\"안녕하세요\"는 대한민국에서 사용되는 흔한 인삿말입니다.", source: "네이버" }} />
-          <Message message={{ text: "안녕하세요" }} />
-          <Answer answer={{ text: "\"안녕하세요\"는 대한민국에서 사용되는 흔한 인삿말입니다.", source: "네이버" }} />
-          
-        </div>
+        <div>{parseMessage()}</div>
         
       </S.ChatContainer>
 
       <S.InputContainer>
         <textarea placeholder="메세지를 입력해주세요" value={inputValue} onChange={handleChange}/>
-        <button className={"button " + (inputValue.length > 0 ? "" : "button-disabled")}>
+        <button className={"button " + (inputValue.length > 0 ? "" : "button-disabled")} onClick={sendQuestion}>
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 32 32" className="icon-2xl"><path fill="currentColor" fillRule="evenodd" d="M15.192 8.906a1.143 1.143 0 0 1 1.616 0l5.143 5.143a1.143 1.143 0 0 1-1.616 1.616l-3.192-3.192v9.813a1.143 1.143 0 0 1-2.286 0v-9.813l-3.192 3.192a1.143 1.143 0 1 1-1.616-1.616z" clipRule="evenodd"></path></svg>
         </button>
       </S.InputContainer>
