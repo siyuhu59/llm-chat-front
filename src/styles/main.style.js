@@ -1,0 +1,142 @@
+import styled from "styled-components";
+
+export const MainContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 80%;
+    height: 100%;
+`;
+
+export const ChatContainer = styled.div`
+    
+
+    overflow-y: auto;
+    width: 100%;
+    padding: 0 calc(50% - 24rem); // 50% - 24rem = 50% - 384px = -334px
+    height: 100%;
+    max-height: calc(100% - 3.75rem);
+
+    > div {
+
+    }
+`;
+
+export const InputContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    max-width: 48rem;
+    background-color: #f4f4f4;
+
+    padding: .375rem .75rem;
+    border-radius: 26px;
+    gap: .5rem;
+
+    margin-bottom: 2rem;
+
+    .button {
+        color: #ffffff;
+        background-color: #000000;
+        border-radius: 9999px;
+
+        width: 2rem;
+        height: 2rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        margin: 0;
+        padding: 0;
+        border: 0 solid #e3e3e3;
+
+        :hover {
+            opacity: 0.7;
+        }
+    }
+
+    .button-disabled {
+        color: #f4f4f4;
+        background-color: #d7d7d7;
+        cursor: not-allowed;
+    }
+
+    textarea {
+        min-width: 0;
+        height: 40px;
+        overflow-y: hidden;
+
+        max-height: 25dvh;
+        color: #0d0d0d;
+        background-color: transparent;
+        border-color: #f4f4f4;
+        border-radius: 0;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        padding: .5rem .75rem;
+
+        appearance: none;
+        resize: none;
+        flex-grow: 1;
+
+        outline: none;
+
+        font-family: inherit;
+
+        :active, :focus {
+            outline: none !important;
+            border-color: #f4f4f4;
+            box-shadow: none;
+        }
+    }
+`;
+
+export const MessageContainer = styled.div`
+    padding: .75rem 1.25rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    
+    > div {
+        max-width: 70%;
+        border-radius: 1.5rem;
+        padding: .625rem 1.25rem;
+
+        background-color: #f4f4f4;
+    }
+`;
+
+export const AnswerContainer = styled.div`
+
+    padding: .75rem 1.25rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    & .answer-menu{
+        display: flex;
+        flex-direction: row;
+
+        font-weight: bold;
+
+        margin-top: 1rem;
+    }
+
+    & .arrow {
+        width: 1rem;
+        transition: transform 0.3s ease;
+        margin-right: .25rem;
+        transform: rotate(-90deg);
+
+        &.open {
+            transform: rotate(0deg);
+        }
+    }
+`;
