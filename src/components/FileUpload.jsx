@@ -7,9 +7,19 @@ const FileUpload = ({ maxFiles, maxSize }) => {
 
   const handleFileChange = (event) => {
     const selectedFiles = Array.from(event.target.files);
+    processFiles(selectedFiles);
+  };
+
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const droppedFiles = Array.from(event.dataTransfer.files);
+    processFiles(droppedFiles);
+  };
+
+  const processFiles = (fileList) => {
     let validFiles = [];
 
-    selectedFiles.forEach((file) => {
+    fileList.forEach((file) => {
       if (file.size <= maxSize) {
         validFiles.push(file);
       } else {
@@ -25,10 +35,17 @@ const FileUpload = ({ maxFiles, maxSize }) => {
     setFiles([...files, ...validFiles]);
   };
 
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <S.UploadContainer>
-      <S.InputContainer>
-        <label htmlFor="fileInput">Click here to upload files</label>
+      <S.InputContainer
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}  
+      >
+        <label htmlFor="fileInput">Click here to upload files or drag and drop files here</label>
         <S.UploadInput
           id="fileInput"
           type="file"
