@@ -29,8 +29,8 @@ export const InputContainer = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    width: 100%;
-    max-width: 48rem;
+    width: 48rem;
+    max-width: 80%;
     background-color: #f4f4f4;
 
     padding: .375rem .75rem;
@@ -67,7 +67,7 @@ export const InputContainer = styled.div`
         cursor: not-allowed;
     }
 
-    textarea {
+    input {
         min-width: 0;
         height: 40px;
         overflow-y: hidden;
@@ -75,6 +75,7 @@ export const InputContainer = styled.div`
         max-height: 25dvh;
         color: #0d0d0d;
         background-color: transparent;
+        border: 0;
         border-color: #f4f4f4;
         border-radius: 0;
         font-size: 1rem;
@@ -101,10 +102,10 @@ export const MessageContainer = styled.div`
     padding: .75rem 1.25rem;
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end;  
     
     > div {
-        max-width: 70%;
+        max-width: 80%;
         border-radius: 1.5rem;
         padding: .625rem 1.25rem;
 
