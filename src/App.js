@@ -11,7 +11,7 @@ const App = () => {
 
   return (
     <S.AppContainer>
-      <Sidebar model={model} key={key} setModel={setModel} setKey={setKey}/>
+      <Sidebar model={model} apikey={key} setModel={setModel} setKey={setKey}/>
       <Main model={model} apiKey={key}/>
     </S.AppContainer>
   );
