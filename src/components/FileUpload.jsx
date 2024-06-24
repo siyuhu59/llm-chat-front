@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import * as S from "../styles/fileUpload.style"
 
 const FileUpload = ({ maxFiles, maxSize }) => {
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState([{name: 'kit_rule.pdf'}]);
 
   const handleFileChange = (event) => {
     const selectedFiles = Array.from(event.target.files);
@@ -39,13 +39,27 @@ const FileUpload = ({ maxFiles, maxSize }) => {
     event.preventDefault();
   };
 
+
+  const downloadFile = async (name) => {
+    const response = await fetch('http://202.31.200.216:38088/hitrule');
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = name; // 다운로드될 파일 이름 설정
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    window.URL.revokeObjectURL(url);
+  }
+
   return (
     <S.UploadContainer>
       <S.InputContainer
         onDrop={handleDrop}
         onDragOver={handleDragOver}  
       >
-        <label htmlFor="fileInput">Click here to upload files or drag and drop files here</label>
+        <label htmlFor="fileInput">클릭하여 파일을 업로드하거나, 파일을 끌어 넣어주세요.</label>
         <S.UploadInput
           id="fileInput"
           type="file"
@@ -55,7 +69,7 @@ const FileUpload = ({ maxFiles, maxSize }) => {
       </S.InputContainer>
       <S.FileList>
         {files.map((file, index) => (
-          <S.FileItem key={index}>
+          <S.FileItem onClick={()=>downloadFile(file.name)} key={index}>
             <S.FileName>{file.name}</S.FileName>
           </S.FileItem>
         ))}

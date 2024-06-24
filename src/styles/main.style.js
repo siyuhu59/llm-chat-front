@@ -121,6 +121,10 @@ export const AnswerContainer = styled.div`
     justify-content: flex-start;
     flex-direction: column;
 
+    & .answer-main {
+        white-space: pre-line;
+    }
+
     & .answer-menu{
         display: flex;
         flex-direction: row;
@@ -139,5 +143,9 @@ export const AnswerContainer = styled.div`
         &.open {
             transform: rotate(0deg);
         }
+    }
+
+    & .answer-source {
+        white-space: pre-line;
     }
 `;

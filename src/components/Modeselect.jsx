@@ -22,7 +22,7 @@ const ModeSelect = ({model, setModel, apikey, setKey}) => {
   return (
     <S.ModeSelectContainer>
       <S.SelectContainer>
-        <S.Label>Select Model</S.Label>
+        <S.Label>모델 선택</S.Label>
         <S.SelectModel value={model} onChange={handleModelChange}>
           <option value="ollama">Ollama</option>
           <option value="gpt4o">GPT-4o</option>
@@ -30,7 +30,7 @@ const ModeSelect = ({model, setModel, apikey, setKey}) => {
       </S.SelectContainer>
 
       <S.InputAPIKeyContainer>
-        <S.Label>OpenAI API Key</S.Label>
+        <S.Label>OpenAI API Key 입력</S.Label>
         <div>
           <S.InputAPIKey type={hide ? "password" : "text"} disabled={model === "gpt4o" ? false : true} value={apikey} onChange={handleKey}/>
           <S.HideButton onClick={handleHide}>{hide ? "Show" : "Hide"}</S.HideButton>

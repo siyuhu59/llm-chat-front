@@ -10,7 +10,7 @@ import * as S from "../styles/main.style";
 const Main = ({apiKey, model}) => {
 
   const [inputValue, setInputValue] = useState("");
-  const { data, error, isLoading, post } = usePost('http://127.0.0.1:8088/question_button');
+  const { data, error, isLoading, post } = usePost('http://202.31.200.216:38088/question_button');
   const [postBody, setPostBody] = useState({
     llm: "ollama",
     question: "",
@@ -30,17 +30,18 @@ const Main = ({apiKey, model}) => {
       (e.type === "keydown" && e.key === "Enter")
     )
 
-    if (condition) {
+    if (condition && !isLoading) {
       console.log("send message");
-      // sendQuestion();
+      sendQuestion();
     }
   }
 
   const sendQuestion = () => {
     setMessages([...messages, {
       type: "q",
-      messages: inputValue
+      message: inputValue
     }])
+    setInputValue("");
     post(postBody)
   }
 
