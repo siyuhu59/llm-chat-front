@@ -60,7 +60,7 @@ const Spinner = styled.div`
 `;
 
 // Variables
-const chatAccent = '#e0e0e0';
+const chatAccent = '#fafafa';
 const chatLight = '#ffffff';
 const chatBg = '#f5f7f8';
 const chatOnline = '#99e67c';

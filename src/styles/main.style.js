@@ -135,13 +135,13 @@ export const AnswerContainer = styled.div`
         padding: 3px;
         position: relative;
         left: -56px;
-        top: 56px;
+        top: 44px;
     }
 
     & .answer-main {
-        padding: 1rem;
-        border-radius: 5px;
-        background-color: #f4f4f4;
+        padding: 1.25rem;
+        border-radius: 8px;
+        background-color: #fafafa;
         white-space: pre-line;
     }
 
