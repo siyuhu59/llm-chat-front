@@ -100,13 +100,13 @@ export const InputContainer = styled.div`
 
 export const MessageContainer = styled.div`
     padding: .75rem 1.25rem;
-    width: 100%;
+    
     display: flex;
     justify-content: flex-end;  
     
     > div {
         max-width: 80%;
-        border-radius: 1.5rem;
+        border-radius: 5px;
         padding: .625rem 1.25rem;
 
         background-color: #f4f4f4;
@@ -121,17 +121,44 @@ export const AnswerContainer = styled.div`
     justify-content: flex-start;
     flex-direction: column;
 
+    &:before {
+        display: block;
+        content: "";
+        background: url( ${process.env.PUBLIC_URL+"/logo192.png"}) center no-repeat;
+        background-size: 40px 40px;
+        /* content : ""; */
+        width: 40px;
+        height: 40px;
+        line-height: 0px;
+        border: 1px solid #d6f6ff;
+        border-radius: 90%;
+        padding: 3px;
+        position: relative;
+        left: -56px;
+        top: 56px;
+    }
+
     & .answer-main {
+        padding: 1rem;
+        border-radius: 5px;
+        background-color: #f4f4f4;
         white-space: pre-line;
     }
 
     & .answer-menu{
         display: flex;
         flex-direction: row;
-
         font-weight: bold;
+        margin-bottom: .5rem;
+        user-select: none;
+    }
 
+    & .answer-source-wrapper{
+        background-color: #eaeaea;
         margin-top: 1rem;
+        border: 1px solid #eaeaea;
+        border-radius: 5px;
+        padding: 1.5rem 1rem 1rem 1rem;
     }
 
     & .arrow {

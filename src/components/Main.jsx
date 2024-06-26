@@ -4,6 +4,7 @@ import usePost from "../hooks/usePost";
 
 import Message from "./Message";
 import Answer from "./Answer";
+import Loading from "./Loading";
 
 import * as S from "../styles/main.style";
 
@@ -17,6 +18,8 @@ const Main = ({apiKey, model}) => {
     key: "None",
     id: "None"
   });
+
+  const [load, setload] = useState(false);
 
   const [messages, setMessages] = useState([]);
 
@@ -42,6 +45,10 @@ const Main = ({apiKey, model}) => {
       message: inputValue
     }])
     setInputValue("");
+
+
+    // for test. finish test you must remove that
+    // setload(true)
     post(postBody)
   }
 
@@ -81,7 +88,10 @@ const Main = ({apiKey, model}) => {
   return (
     <S.MainContainer>
       <S.ChatContainer>
-        <div>{parseMessage()}</div>
+        <div>
+          {parseMessage()}
+          {isLoading ? <Loading /> : null}
+        </div>
         
       </S.ChatContainer>
 
