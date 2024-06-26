@@ -118,7 +118,7 @@ const LoadingBubble = styled.div`
     margin-left: 0px;
 
     > div {
-      background-color: #fff;
+      background-color: #d4d4d4;
     }
   }
 `;
