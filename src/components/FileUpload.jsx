@@ -41,7 +41,7 @@ const FileUpload = ({ maxFiles, maxSize }) => {
 
 
   const downloadFile = async (name) => {
-    const response = await fetch('http://202.31.200.216:38088/hitrule');
+    const response = await fetch('http://cvpr.kumoh.ac.kr/rag/chatbot/api/hitrule');
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
