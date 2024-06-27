@@ -7,14 +7,20 @@ import usePost from "../../hooks/usePost";
 const QuestionSelect = ({ mqlist, config, setAnswer, setMQlist }) => {
     
     const { data, error, isLoading, post } = usePost('http://cvpr.kumoh.ac.kr/rag/chatbot/api/MQ_send');
-
-
     const [selected, setSelected] = useState([1, 1, 1, 1, 1]);
+    
+    useEffect(() => {
+        setMQlist(mqlist);
+    }, [mqlist, setMQlist])
+
+    useEffect(() => {
+        setMQlist(selected.filter((item, index) => item === 1).map((item, index) => mqlist[index]));
+    }, [selected, mqlist, setMQlist]);
+    
     const select = (index) => {
         var temp = [...selected]
         temp[index] = temp[index] === 0 ? 1 : 0;
         setSelected(temp);
-        setMQlist(temp.map((item) => item === 1 ? mqlist[index] : 'null'))
     }
 
     const sendQuestion = () => {
