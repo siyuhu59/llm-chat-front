@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 
 import * as S from "../../styles/settings.style";
 
-// highlightText 함수 정의
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function highlightText(text, highlights) {
     highlights.forEach(highlight => {
-        const regex = new RegExp(`(${highlight})`, 'gi');
+        const escapedHighlight = escapeRegExp(highlight);
+        const regex = new RegExp(`(${escapedHighlight})`, 'gi');
         text = text.replace(regex, `<span style='background-color:#fefd48;'>$1</span>`);
     });
     return text;
@@ -27,6 +31,7 @@ const Resource = ({ resource }) => {
     useEffect(() => {
         if (resource.paragraph.length === 0) return;
         console.log(resource.paragraph[page].context, resource.paragraph[page].source)
+        
         setHighlightedText(highlightText(resource.paragraph[page].context, resource.paragraph[page].source));
     }, [resource, page])
 
