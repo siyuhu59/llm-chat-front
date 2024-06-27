@@ -8,23 +8,14 @@ import Loading from "./Loading";
 
 import * as S from "../styles/main.style";
 
-const Main = ({apiKey, model, hide}) => {
+const Main = ({config, setQuestion, setFirstAnswer, hide}) => {
 
-  const [inputValue, setInputValue] = useState("");
   const { data, error, isLoading, post } = usePost('http://cvpr.kumoh.ac.kr/rag/chatbot/api/question_button');
-  const [postBody, setPostBody] = useState({
-    llm: "ollama",
-    question: "",
-    key: "None",
-    id: "None"
-  });
-
-  const [load, setload] = useState(false);
 
   const [messages, setMessages] = useState([]);
 
   const handleChange = (e) => {
-    setInputValue(e.target.value);
+    setQuestion(e.target.value);
   }
 
   const handleSend = (e) => {
@@ -42,14 +33,14 @@ const Main = ({apiKey, model, hide}) => {
   const sendQuestion = () => {
     setMessages([...messages, {
       type: "q",
-      message: inputValue
+      message: config.question
     }])
-    setInputValue("");
-
+    setQuestion("")
 
     // for test. finish test you must remove that
     // setload(true)
-    post(postBody)
+    console.log(config)
+    post(config)
   }
 
   const parseMessage = () => {
@@ -63,23 +54,9 @@ const Main = ({apiKey, model, hide}) => {
   }
 
   useEffect(()=>{
-    setPostBody({
-      ...setPostBody,
-      llm: model,
-      question: inputValue,
-      key: apiKey
-    })
-
-  }, [inputValue, model, apiKey])
-
-  useEffect(()=>{
     if(data) {
       console.log(data);
-      setMessages([...messages, {
-        type:"a",
-        message: data.answer,
-        source: data.source
-      }])
+      setFirstAnswer(data);
     }
   }, [data]);
 
@@ -96,8 +73,8 @@ const Main = ({apiKey, model, hide}) => {
       </S.ChatContainer>
 
       <S.InputContainer>
-        <input placeholder="메세지를 입력해주세요" value={inputValue} onChange={handleChange} onKeyDown={handleSend}/>
-        <button className={"button " + (inputValue.length > 0 ? "" : "button-disabled")} onClick={handleSend}>
+        <input placeholder="메세지를 입력해주세요" value={config.question} onChange={handleChange} onKeyDown={handleSend}/>
+        <button className={"button " + (config.question.length > 0 ? "" : "button-disabled")} onClick={handleSend}>
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 32 32" className="icon-2xl"><path fill="currentColor" fillRule="evenodd" d="M15.192 8.906a1.143 1.143 0 0 1 1.616 0l5.143 5.143a1.143 1.143 0 0 1-1.616 1.616l-3.192-3.192v9.813a1.143 1.143 0 0 1-2.286 0v-9.813l-3.192 3.192a1.143 1.143 0 1 1-1.616-1.616z" clipRule="evenodd"></path></svg>
         </button>
       </S.InputContainer>

@@ -1,16 +1,8 @@
 import { useState } from "react";
 import * as S from "../../styles/settings.style";
 
-const tempData = [
-    "질문 1",
-    "질문 2",
-    "질문 3",
-    "질문 4",
-    "질문 5",
-]
 
-
-const QuestionSelect = () => {
+const QuestionSelect = ({mqlist}) => {
 
     const [selected, setSelected] = useState([1, 1, 1, 1, 1]);
     const select = (index) => {
@@ -23,7 +15,7 @@ const QuestionSelect = () => {
         <S.SettingsDetailContainer>
             <h3>세부 질문 선택</h3>
             <S.QuestionSelectList>
-                {tempData.map((item, index) => (
+                {mqlist.map((item, index) => (
                     <li
                         className={selected[index] === 1 ? "selected" : ""}
                         onClick={()=>{select(index)}}
