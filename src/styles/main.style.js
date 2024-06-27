@@ -178,3 +178,28 @@ export const AnswerContainer = styled.div`
         white-space: pre-line;
     }
 `;
+
+
+export const ClearButton = styled.button`
+    position: fixed;
+    left: 12%;
+    bottom: 2rem;
+
+    width: 2rem;
+    height: 2rem;
+
+    background-color: transparent;
+    border: 0;
+
+    cursor: pointer;
+
+    &:hover, &:active {
+        transform: scale(1.1);
+    }
+
+
+    & img {
+        width: 100%;
+        height: 100%;
+    }
+`

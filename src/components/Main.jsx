@@ -6,6 +6,8 @@ import Message from "./Message";
 import Answer from "./Answer";
 import Loading from "./Loading";
 
+import del from "../assets/images/delete.png";
+
 import * as S from "../styles/main.style";
 
 const Main = ({config, setQuestion, setFirstAnswer, hide, answer, secondLoading}) => {
@@ -69,7 +71,9 @@ const Main = ({config, setQuestion, setFirstAnswer, hide, answer, secondLoading}
     }
   }, [answer])
 
-
+  const clearChat = () => {
+    setMessages([]);
+  }
 
   return (
     <S.MainContainer style={hide ? { width: '85%' } : {}}>
@@ -87,6 +91,10 @@ const Main = ({config, setQuestion, setFirstAnswer, hide, answer, secondLoading}
           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 32 32" className="icon-2xl"><path fill="currentColor" fillRule="evenodd" d="M15.192 8.906a1.143 1.143 0 0 1 1.616 0l5.143 5.143a1.143 1.143 0 0 1-1.616 1.616l-3.192-3.192v9.813a1.143 1.143 0 0 1-2.286 0v-9.813l-3.192 3.192a1.143 1.143 0 1 1-1.616-1.616z" clipRule="evenodd"></path></svg>
         </button>
       </S.InputContainer>
+
+      <S.ClearButton onClick={clearChat}>
+        <img src={del} alt="delete" />
+      </S.ClearButton>
     </S.MainContainer>
   );
 }
