@@ -24,17 +24,55 @@ export const FileList = styled.div`
 `;
 
 export const FileItem = styled.div`
-    margin-bottom: 5px;
+    margin-bottom: .75rem;
     margin-right: 5px;
     padding: .5rem 1rem;
+
+    width: 100%;
+
+    cursor: pointer;
 
     border : .12rem solid #ddd;
     border-radius: .25rem;
 
     &:hover {
-        background-color: #f0f0f0;
+        background-color: #e0e0e0;
     }    
+    &:active {
+        background-color: #ddd;
+    }
+    &.selected{
+        background-color: #e0e0e0;
+
+        &:hover {
+            background-color: #fafafa;
+        }
+    }
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    & div {
+        width: 1rem;
+        height: 1rem;
+
+        &:hover{
+            transform: scale(1.1);
+        }
+
+        &:active {
+            transform: scale(1.1);
+        }
+    }
+
+    & div img {
+        width: 1rem;
+        height: 1rem;
+    }
 `;
+
 
 export const FileName = styled.span`
     font-size: .75rem;

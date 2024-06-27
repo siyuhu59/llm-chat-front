@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 
 import * as S from "../styles/fileUpload.style"
 
+import download from "../assets/images/download.png"
+
 const FileUpload = ({ maxFiles, maxSize }) => {
-  const [files, setFiles] = useState([{name: 'kit_rule.pdf'}]);
+  const [files, setFiles] = useState([{ name: 'kit01.pdf' }]);
+  const [selectedFiles, setSelectedFiles] = useState([1]);
 
   const handleFileChange = (event) => {
     const selectedFiles = Array.from(event.target.files);
@@ -18,10 +21,12 @@ const FileUpload = ({ maxFiles, maxSize }) => {
 
   const processFiles = (fileList) => {
     let validFiles = [];
+    let selectFiles = [];
 
     fileList.forEach((file) => {
       if (file.size <= maxSize) {
         validFiles.push(file);
+        selectFiles.push(1);
       } else {
         alert(`${file.name} is too large. Max size is ${maxSize / 1024 / 1024} MB`);
       }
@@ -33,11 +38,18 @@ const FileUpload = ({ maxFiles, maxSize }) => {
     }
 
     setFiles([...files, ...validFiles]);
+    setSelectedFiles([...selectedFiles, ...selectFiles]);
   };
 
   const handleDragOver = (event) => {
     event.preventDefault();
   };
+
+  const selectFile = (index) => {
+    const newSelectedFiles = [...selectedFiles];
+    newSelectedFiles[index] = newSelectedFiles[index] === 1 ? 0 : 1;
+    setSelectedFiles(newSelectedFiles);
+  }
 
 
   const downloadFile = async (name) => {
@@ -69,8 +81,11 @@ const FileUpload = ({ maxFiles, maxSize }) => {
       </S.InputContainer>
       <S.FileList>
         {files.map((file, index) => (
-          <S.FileItem onClick={()=>downloadFile(file.name)} key={index}>
+          <S.FileItem className={selectedFiles[index] === 1 ? 'selected' : ''} key={index} onClick={()=>selectFile(index)}>
             <S.FileName>{file.name}</S.FileName>
+            <div>
+              <img onClick={()=>downloadFile(file.name)} src={download} alt="download" />
+            </div>
           </S.FileItem>
         ))}
       </S.FileList>
