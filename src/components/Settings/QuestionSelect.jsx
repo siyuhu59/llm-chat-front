@@ -14,7 +14,7 @@ const QuestionSelect = ({ mqlist, config, setAnswer, setMQlist }) => {
     }, [mqlist, setMQlist])
 
     useEffect(() => {
-        setMQlist(selected.filter((item, index) => item === 1).map((item, index) => mqlist[index]));
+        setMQlist(selected.map((item, index) => item === 1 ? mqlist[index] : null));
     }, [selected, mqlist, setMQlist]);
     
     const select = (index) => {
