@@ -38,6 +38,7 @@ const FileUpload = ({ maxFiles, maxSize, setFileNames }) => {
     };
   
     files.forEach((file, index) => {
+      if (index === 0) return;
       if (selectedFiles[index] === 1) {
         uploadFile(file);
       }
