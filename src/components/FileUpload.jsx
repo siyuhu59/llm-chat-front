@@ -9,33 +9,39 @@ const FileUpload = ({ maxFiles, maxSize, setFileNames }) => {
   const [selectedFiles, setSelectedFiles] = useState([1]);
 
   useEffect(() => {
-    const uploadFiles = async () => {
+    if (files.length === 0) {
+      return;
+    }
+    const uploadFile = async (file) => {
       const formData = new FormData();
-      files.forEach(file => {
-        if (selectedFiles[files.indexOf(file)] === 1) {
-          formData.append('files', file);
-        }
-      });
-    
+      formData.append('file', file); // 'file' 대신 서버에서 요구하는 필드명 사용
+  
       try {
         const response = await fetch('http://cvpr.kumoh.ac.kr/rag/chatbot/api/uploadfile', {
           method: 'POST',
           credentials: 'include',
+          headers: {
+            'Content-Type': 'application/pdf',
+          },
           body: formData,
         });
-    
+  
         if (!response.ok) {
           throw new Error('File upload failed');
         }
-    
+  
         const result = await response.json();
         console.log('Upload successful', result);
       } catch (error) {
-        console.error('Error uploading files:', error);
+        console.error('Error uploading file:', error);
       }
     };
-
-    uploadFiles();
+  
+    files.forEach((file, index) => {
+      if (selectedFiles[index] === 1) {
+        uploadFile(file);
+      }
+    });
   }, [files, selectedFiles])
 
   const handleFileChange = (event) => {
