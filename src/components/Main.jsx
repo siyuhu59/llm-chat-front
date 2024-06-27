@@ -11,7 +11,7 @@ import * as S from "../styles/main.style";
 const Main = ({apiKey, model}) => {
 
   const [inputValue, setInputValue] = useState("");
-  const { data, error, isLoading, post } = usePost('http://cvpr.kumoh.ac.kr/rag/chatbot/api/question_button_2');
+  const { data, error, isLoading, post } = usePost('http://cvpr.kumoh.ac.kr/rag/chatbot/api/question_button2');
   const [postBody, setPostBody] = useState({
     llm: "ollama",
     question: "",
