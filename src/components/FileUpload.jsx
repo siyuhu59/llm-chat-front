@@ -20,6 +20,7 @@ const FileUpload = ({ maxFiles, maxSize, setFileNames }) => {
       try {
         const response = await fetch('http://cvpr.kumoh.ac.kr/rag/chatbot/api/uploadfile', {
           method: 'POST',
+          credentials: 'include',
           body: formData,
         });
     
