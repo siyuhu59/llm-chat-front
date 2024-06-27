@@ -10,7 +10,7 @@ const Settings = ({mqlist, setAnswer, hide, config, setMQlist, answer}) => {
     return (
         <S.SettingContainer className={hide ? 'hide' : ''}>
             <QuestionSelect config={config} mqlist={mqlist} setAnswer={setAnswer} setMQlist={setMQlist} />
-            <Resource />
+            <Resource resource={answer} />
             <Logs logs={answer} />
         </S.SettingContainer>
     )
