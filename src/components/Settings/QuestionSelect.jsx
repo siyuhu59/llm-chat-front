@@ -4,18 +4,18 @@ import * as S from "../../styles/settings.style";
 import usePost from "../../hooks/usePost";
 
 
-const QuestionSelect = ({ mqlist, config, setAnswer, setMQlist }) => {
+const QuestionSelect = ({ mqlist, config, setAnswer, setMQlist, setLoading }) => {
     
     const { data, error, isLoading, post } = usePost('http://cvpr.kumoh.ac.kr/rag/chatbot/api/MQ_send');
     const [selected, setSelected] = useState([1, 1, 1, 1, 1]);
     
     useEffect(() => {
         setMQlist(mqlist);
-    }, [mqlist, setMQlist])
+    }, [])
 
     useEffect(() => {
         setMQlist(selected.map((item, index) => item === 1 ? mqlist[index] : 'null'));
-    }, [selected, mqlist, setMQlist]);
+    }, [selected]);
     
     const select = (index) => {
         var temp = [...selected]
@@ -33,6 +33,10 @@ const QuestionSelect = ({ mqlist, config, setAnswer, setMQlist }) => {
             setAnswer(data);
         }
     }, [data])
+
+    useEffect(() => {
+        setLoading(isLoading)
+    }, [isLoading])
 
     return (
         <S.SettingsDetailContainer>

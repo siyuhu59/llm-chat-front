@@ -77,6 +77,8 @@ const App = () => {
     paragraph: []
   });
 
+  const [secondLoading, setSecondLoading] = useState(false);
+
 
 
   const onToggle = () => {
@@ -86,7 +88,7 @@ const App = () => {
   return (
     <S.AppContainer>
       <Sidebar config={firstConfig} setConfig={setConfigSidebar} setFiles={setFiles}/>
-      <Main config={firstConfig} setQuestion={setQuestion} setFirstAnswer={setFirstAnswer} answer={secondAnswer} hide={hide}/>
+      <Main config={firstConfig} setQuestion={setQuestion} setFirstAnswer={setFirstAnswer} answer={secondAnswer} hide={hide} secondLoading={secondLoading}/>
       <Settings 
         mqlist={firstAnswer} 
         setAnswer={setSecondAnswer} 
@@ -94,6 +96,7 @@ const App = () => {
         hide={hide}
         setMQlist={setMQlist}
         answer={secondAnswer}
+        setSecondLoading={setSecondLoading}
       />
       <S.SidebarToggleButton className={hide ? 'hide' : ''} onClick={onToggle}><span></span></S.SidebarToggleButton>
     </S.AppContainer>
