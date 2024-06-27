@@ -69,8 +69,8 @@ const App = () => {
     });
   }
   const [secondAnswer, setSecondAnswer] = useState({
-    RetriverLog: '',
-    MQRetriverLog: '',
+    RetrieverLog: '',
+    MQRetrieverLog: '',
     RerankLog: '',
     score: [],
     answer: '',

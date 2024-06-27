@@ -26,6 +26,7 @@ const Resource = ({ resource }) => {
     const [highlightedText, setHighlightedText] = useState('');
     useEffect(() => {
         if (resource.paragraph.length === 0) return;
+        console.log(resource.paragraph[page].context, resource.paragraph[page].source)
         setHighlightedText(highlightText(resource.paragraph[page].context, resource.paragraph[page].source));
     }, [resource, page])
 
