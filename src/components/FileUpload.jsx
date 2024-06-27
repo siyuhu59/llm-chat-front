@@ -8,42 +8,30 @@ const FileUpload = ({ maxFiles, maxSize, setFileNames }) => {
   const [files, setFiles] = useState([{ name: 'kit01.pdf' }]);
   const [selectedFiles, setSelectedFiles] = useState([1]);
 
-  useEffect(() => {
-    if (files.length <= 1) {
-      return;
-    }
-    const uploadFile = async (file) => {
-      const formData = new FormData();
-      formData.append('file', file); // 'file' 대신 서버에서 요구하는 필드명 사용
-  
-      try {
-        const response = await fetch('http://cvpr.kumoh.ac.kr/rag/chatbot/api/uploadfile', {
-          method: 'POST',
-          body: formData,
-          credentials: 'include',  // This ensures cookies are sent with the request
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-  
-        if (!response.ok) {
-          throw new Error('File upload failed');
+  const uploadFile = async (file) => {
+    const formData = new FormData();
+    formData.append('file', file); // 'file' 대신 서버에서 요구하는 필드명 사용
+
+    try {
+      const response = await fetch('http://cvpr.kumoh.ac.kr/rag/chatbot/api/uploadfile', {
+        method: 'POST',
+        body: formData,
+        credentials: 'include',  // This ensures cookies are sent with the request
+        headers: {
+          'Accept': 'application/json'
         }
-  
-        const result = await response.json();
-        console.log('Upload successful', result);
-      } catch (error) {
-        console.error('Error uploading file:', error);
+      });
+
+      if (!response.ok) {
+        throw new Error('File upload failed');
       }
-    };
-  
-    files.forEach((file, index) => {
-      if (index === 0) return;
-      if (selectedFiles[index] === 1) {
-        uploadFile(file);
-      }
-    });
-  }, [files, selectedFiles])
+
+      const result = await response.json();
+      console.log('Upload successful', result);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  };
 
   const handleFileChange = (event) => {
     const selectedFiles = Array.from(event.target.files);
@@ -57,6 +45,10 @@ const FileUpload = ({ maxFiles, maxSize, setFileNames }) => {
   };
 
   const processFiles = (fileList) => {
+    fileList.forEach((file) => {
+      uploadFile(file);
+    });
+
     let validFiles = [];
     let selectFiles = [];
 
