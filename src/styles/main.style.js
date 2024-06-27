@@ -6,8 +6,10 @@ export const MainContainer = styled.div`
     align-items: center;
     flex-direction: column;
 
-    width: 80%;
+    width: 60%;
     height: 100%;
+
+    transition: width 0.5s;
 `;
 
 export const ChatContainer = styled.div`

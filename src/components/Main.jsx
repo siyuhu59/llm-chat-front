@@ -8,7 +8,7 @@ import Loading from "./Loading";
 
 import * as S from "../styles/main.style";
 
-const Main = ({apiKey, model}) => {
+const Main = ({apiKey, model, hide}) => {
 
   const [inputValue, setInputValue] = useState("");
   const { data, error, isLoading, post } = usePost('http://cvpr.kumoh.ac.kr/rag/chatbot/api/question_button');
@@ -86,7 +86,7 @@ const Main = ({apiKey, model}) => {
 
 
   return (
-    <S.MainContainer>
+    <S.MainContainer style={hide ? { width: '85%' } : {}}>
       <S.ChatContainer>
         <div>
           {parseMessage()}

@@ -6,7 +6,7 @@ export const SidebarContainer = styled.div`
     /* justify-content: center; */
     align-items: center;
     flex-direction: column;
-    width: 20%;
+    width: 15%;
     height: 100%;
     background-color: #f9f9f9;
 `;
