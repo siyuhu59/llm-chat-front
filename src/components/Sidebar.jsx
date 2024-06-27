@@ -3,11 +3,11 @@ import ModeSelect from "./Modeselect";
 
 import * as S from "../styles/sidebar.style";
 
-const Sidebar = ({config, setConfig}) => {
+const Sidebar = ({config, setConfig, setFiles}) => {
   return (
     <S.SidebarContainer>
-      <FileUpload maxFiles={10} maxSize={10485760}/>
-      <ModeSelect config={config} setConfig={setConfig}/>
+      <FileUpload maxFiles={10} maxSize={10485760} setFileNames={setFiles}/>
+      <ModeSelect config={config} setConfig={setConfig}  />
     </S.SidebarContainer>
   );
 }

@@ -1,15 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "../../styles/settings.style";
 
+import usePost from "../../hooks/usePost";
 
-const QuestionSelect = ({mqlist}) => {
+
+const QuestionSelect = ({ mqlist, config, setAnswer, setMQlist }) => {
+    
+    const { data, error, isLoading, post } = usePost('http://cvpr.kumoh.ac.kr/rag/chatbot/api/MQ_send');
+
 
     const [selected, setSelected] = useState([1, 1, 1, 1, 1]);
     const select = (index) => {
         var temp = [...selected]
         temp[index] = temp[index] === 0 ? 1 : 0;
         setSelected(temp);
+        setMQlist(temp.map((item) => item === 1 ? mqlist[index] : 'null'))
     }
+
+    const sendQuestion = () => {
+        post(config);
+    }
+
+    useEffect(() => {
+        if (data) {
+            console.log(data);
+        }
+    }, [data])
 
     return (
         <S.SettingsDetailContainer>
@@ -20,12 +36,12 @@ const QuestionSelect = ({mqlist}) => {
                         className={selected[index] === 1 ? "selected" : ""}
                         onClick={()=>{select(index)}}
                     >
-                        {index + 1}. {item}
+                        {item}
                     </li>
                 ))}
             </S.QuestionSelectList>
             <S.SettingsButton>
-                <button>질문 전송</button>
+                <button onClick={sendQuestion}>질문 전송</button>
             </S.SettingsButton>
             
         </S.SettingsDetailContainer>

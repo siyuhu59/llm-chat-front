@@ -4,7 +4,7 @@ import * as S from "../styles/fileUpload.style"
 
 import download from "../assets/images/download.png"
 
-const FileUpload = ({ maxFiles, maxSize }) => {
+const FileUpload = ({ maxFiles, maxSize, setFileNames }) => {
   const [files, setFiles] = useState([{ name: 'kit01.pdf' }]);
   const [selectedFiles, setSelectedFiles] = useState([1]);
 
@@ -49,6 +49,7 @@ const FileUpload = ({ maxFiles, maxSize }) => {
     const newSelectedFiles = [...selectedFiles];
     newSelectedFiles[index] = newSelectedFiles[index] === 1 ? 0 : 1;
     setSelectedFiles(newSelectedFiles);
+    setFileNames(files.filter((file, i) => newSelectedFiles[i] === 1).map((file) => file.name));
   }
 
 

@@ -52,6 +52,24 @@ const App = () => {
   }
   // 첫번째 질문 답변: 멀티쿼리 배열
   const [firstAnswer, setFirstAnswer] = useState([1, 1, 1, 1, 1]);
+  const [secondConfig, setSecondConfig] = useState({
+    fileNames: ['kit01.pdf'],
+    mq: []
+  });
+  const setMQlist = (mq) => {
+    setSecondConfig({
+      ...secondConfig,
+      mq: mq
+    });
+  }
+  const setFiles = (files) => {
+    setSecondConfig({
+      ...secondConfig,
+      fileNames: files
+    });
+  }
+  const [secondAnswer, setSecondAnswer] = useState({});
+  
 
 
   const onToggle = () => {
@@ -60,9 +78,15 @@ const App = () => {
 
   return (
     <S.AppContainer>
-      <Sidebar config={firstConfig} setConfig={setConfigSidebar}/>
+      <Sidebar config={firstConfig} setConfig={setConfigSidebar} setFiles={setFiles}/>
       <Main config={firstConfig} setQuestion={setQuestion} setFirstAnswer={setFirstAnswer} hide={hide}/>
-      <Settings mqlist={firstAnswer} hide={hide}/>
+      <Settings 
+        mqlist={firstAnswer} 
+        setAnswer={setSecondAnswer} 
+        config={secondConfig} 
+        hide={hide}
+        setMQlist={setMQlist}
+      />
       <S.SidebarToggleButton className={hide ? 'hide' : ''} onClick={onToggle}><span></span></S.SidebarToggleButton>
     </S.AppContainer>
   );
