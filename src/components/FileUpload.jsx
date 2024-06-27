@@ -9,7 +9,7 @@ const FileUpload = ({ maxFiles, maxSize, setFileNames }) => {
   const [selectedFiles, setSelectedFiles] = useState([1]);
 
   useEffect(() => {
-    if (files.length === 0) {
+    if (files.length <= 1) {
       return;
     }
     const uploadFile = async (file) => {
@@ -19,11 +19,11 @@ const FileUpload = ({ maxFiles, maxSize, setFileNames }) => {
       try {
         const response = await fetch('http://cvpr.kumoh.ac.kr/rag/chatbot/api/uploadfile', {
           method: 'POST',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/pdf',
-          },
           body: formData,
+          credentials: 'include',  // This ensures cookies are sent with the request
+          headers: {
+            'Accept': 'application/json'
+          }
         });
   
         if (!response.ok) {
