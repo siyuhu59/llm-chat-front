@@ -51,7 +51,7 @@ const App = () => {
     });
   }
   // 첫번째 질문 답변: 멀티쿼리 배열
-  const [firstAnswer, setFirstAnswer] = useState([1, 1, 1, 1, 1]);
+  const [firstAnswer, setFirstAnswer] = useState(['', '', '', '', '']);
   const [secondConfig, setSecondConfig] = useState({
     fileNames: ['kit01.pdf'],
     mq: []
@@ -72,7 +72,9 @@ const App = () => {
     RetriverLog: '',
     MQRetriverLog: '',
     RerankLog: '',
-    score: ''
+    score: [],
+    answer: '',
+    paragraph: []
   });
 
 

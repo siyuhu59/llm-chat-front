@@ -61,7 +61,7 @@ const Main = ({config, setQuestion, setFirstAnswer, hide, answer}) => {
   }, [data]);
 
   useEffect(() => {
-    if(answer.answer) {
+    if(answer.answer !== "") {
       setMessages([...messages, {
         type: "a",
         message: answer.answer
