@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import * as S from "../styles/fileUpload.style"
 
@@ -7,6 +7,35 @@ import download from "../assets/images/download.png"
 const FileUpload = ({ maxFiles, maxSize, setFileNames }) => {
   const [files, setFiles] = useState([{ name: 'kit01.pdf' }]);
   const [selectedFiles, setSelectedFiles] = useState([1]);
+
+  useEffect(() => {
+    const uploadFiles = async () => {
+      const formData = new FormData();
+      files.forEach(file => {
+        if (selectedFiles[files.indexOf(file)] === 1) {
+          formData.append('files', file);
+        }
+      });
+    
+      try {
+        const response = await fetch('http://cvpr.kumoh.ac.kr/rag/chatbot/api/uploadfile', {
+          method: 'POST',
+          body: formData,
+        });
+    
+        if (!response.ok) {
+          throw new Error('File upload failed');
+        }
+    
+        const result = await response.json();
+        console.log('Upload successful', result);
+      } catch (error) {
+        console.error('Error uploading files:', error);
+      }
+    };
+
+    uploadFiles();
+  }, [files, selectedFiles])
 
   const handleFileChange = (event) => {
     const selectedFiles = Array.from(event.target.files);
