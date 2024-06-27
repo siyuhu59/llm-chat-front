@@ -6,6 +6,7 @@ export const SettingContainer = styled.div`
   top: 0;
   display: flex;
   flex-direction: column;
+  width: 25%;
   max-width: 25%;
   height: 100vh;
 
@@ -48,6 +49,7 @@ export const SettingsDetailContainer = styled.div`
   background-color: #fff;
 
   margin-bottom: 2.5rem;
+  max-height: 30vh;
 
   & h3 {
     margin-bottom: 1rem;
