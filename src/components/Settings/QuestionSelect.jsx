@@ -29,7 +29,7 @@ const QuestionSelect = ({ mqlist, config, setAnswer, setMQlist }) => {
 
     useEffect(() => {
         if (data) {
-            console.log(data);
+            setAnswer(data);
         }
     }, [data])
 

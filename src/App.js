@@ -68,8 +68,13 @@ const App = () => {
       fileNames: files
     });
   }
-  const [secondAnswer, setSecondAnswer] = useState({});
-  
+  const [secondAnswer, setSecondAnswer] = useState({
+    RetriverLog: '',
+    MQRetriverLog: '',
+    RerankLog: '',
+    score: ''
+  });
+
 
 
   const onToggle = () => {
@@ -79,13 +84,14 @@ const App = () => {
   return (
     <S.AppContainer>
       <Sidebar config={firstConfig} setConfig={setConfigSidebar} setFiles={setFiles}/>
-      <Main config={firstConfig} setQuestion={setQuestion} setFirstAnswer={setFirstAnswer} hide={hide}/>
+      <Main config={firstConfig} setQuestion={setQuestion} setFirstAnswer={setFirstAnswer} answer={secondAnswer} hide={hide}/>
       <Settings 
         mqlist={firstAnswer} 
         setAnswer={setSecondAnswer} 
         config={secondConfig} 
         hide={hide}
         setMQlist={setMQlist}
+        answer={secondAnswer}
       />
       <S.SidebarToggleButton className={hide ? 'hide' : ''} onClick={onToggle}><span></span></S.SidebarToggleButton>
     </S.AppContainer>

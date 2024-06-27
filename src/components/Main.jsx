@@ -8,7 +8,7 @@ import Loading from "./Loading";
 
 import * as S from "../styles/main.style";
 
-const Main = ({config, setQuestion, setFirstAnswer, hide}) => {
+const Main = ({config, setQuestion, setFirstAnswer, hide, answer}) => {
 
   const { data, error, isLoading, post } = usePost('http://cvpr.kumoh.ac.kr/rag/chatbot/api/question_button');
 
@@ -48,7 +48,7 @@ const Main = ({config, setQuestion, setFirstAnswer, hide}) => {
       return (
         item.type === "q" ?
         <Message message={{text: item.message}} /> :
-        <Answer answer={{text: item.message, source: item.source}} />
+        <Answer answer={{text: item.message}} />
       )
     })
   }
@@ -59,6 +59,15 @@ const Main = ({config, setQuestion, setFirstAnswer, hide}) => {
       setFirstAnswer(data);
     }
   }, [data]);
+
+  useEffect(() => {
+    if(answer.answer) {
+      setMessages([...messages, {
+        type: "a",
+        message: answer.answer
+      }])
+    }
+  }, [answer])
 
 
 

@@ -5,13 +5,13 @@ import Resource from "./Settings/Resource";
 import Logs from "./Settings/Logs";
 
 
-const Settings = ({mqlist, setAnswer, hide, config, setMQlist}) => {
+const Settings = ({mqlist, setAnswer, hide, config, setMQlist, answer}) => {
 
     return (
         <S.SettingContainer className={hide ? 'hide' : ''}>
             <QuestionSelect config={config} mqlist={mqlist} setAnswer={setAnswer} setMQlist={setMQlist} />
             <Resource />
-            <Logs />
+            <Logs logs={answer} />
         </S.SettingContainer>
     )
 }

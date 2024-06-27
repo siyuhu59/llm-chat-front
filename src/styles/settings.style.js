@@ -58,6 +58,9 @@ export const QuestionSelectList = styled.ol`
   padding-left: 1rem;
   list-style: none; 
   margin-bottom: .75rem;
+
+  max-height: 75%;
+  overflow: scroll;
   & > li {
     padding: .5rem .5rem;
     margin: .5rem 0rem;
