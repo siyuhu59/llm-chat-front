@@ -203,3 +203,29 @@ export const ClearButton = styled.button`
         height: 100%;
     }
 `
+
+export const TitleWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+
+    margin-top: 10rem;
+
+    & > div {
+        width: 80px;
+        height: 80px;
+        margin-right: .5rem;
+
+        & img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    & h1 {
+        font-size: 2.8rem;
+        font-weight: bold;
+        margin: 0;
+    }
+
+`

@@ -7,6 +7,7 @@ import Answer from "./Answer";
 import Loading from "./Loading";
 
 import del from "../assets/images/delete.png";
+import logo from "../assets/images/logo192.png"
 
 import * as S from "../styles/main.style";
 
@@ -78,6 +79,16 @@ const Main = ({config, setQuestion, setFirstAnswer, hide, answer, secondLoading}
   return (
     <S.MainContainer style={hide ? { width: '85%' } : {}}>
       <S.ChatContainer>
+        {messages.length === 0 ? 
+          <S.TitleWrapper>
+            <div>
+              <img src={logo} alt='logo'/>
+            </div>
+            <h1>Chatbot</h1>
+          </S.TitleWrapper>
+          : null
+        }
+
         <div>
           {parseMessage()}
           {isLoading || secondLoading ? <Loading /> : null}
