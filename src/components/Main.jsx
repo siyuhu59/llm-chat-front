@@ -57,7 +57,7 @@ const Main = ({apiKey, model}) => {
       return (
         item.type === "q" ?
         <Message message={{text: item.message}} /> :
-        <Answer answer={{text: item.message, source: item.source}} />
+        <Answer answer={{text: item.message, paragraph: item.paragraph}} />
       )
     })
   }
@@ -78,7 +78,7 @@ const Main = ({apiKey, model}) => {
       setMessages([...messages, {
         type:"a",
         message: data.answer,
-        source: data.source
+        paragraph: data.paragraph
       }])
     }
   }, [data]);
