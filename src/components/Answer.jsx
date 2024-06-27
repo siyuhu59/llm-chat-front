@@ -1,9 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import * as S from "../styles/main.style";
 
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function highlightText(text, highlights) {
+  highlights.forEach(highlight => {
+      const escapedHighlight = escapeRegExp(highlight);
+      const regex = new RegExp(`(${escapedHighlight})`, 'gi');
+      text = text.replace(regex, `<span style='background-color:#fefd48;'>$1</span>`);
+  });
+  return text;
+}
+
+
 const Answer = ({ answer }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [highlightedText, setHighlightedText] = useState("");
+
+  useEffect(() => {
+    var text = ''
+    if (answer.paragraph.length > 0) {
+      answer.paragraph.forEach((item) => {
+        text += highlightText(item.context, item.source);
+        text += "<br><br>";
+      });
+    }
+    setHighlightedText(text);
+  }, [answer])
 
   const handleClick = () => {
     setIsOpen(!isOpen);
@@ -21,7 +47,9 @@ const Answer = ({ answer }) => {
           <div className={"arrow " + (isOpen ? "open" : "")} >▼</div>
           <div>출처</div>
         </div>
-        {isOpen ? <div className="answer-source">{answer.source}</div> : null}
+        {isOpen ?
+          <div className="answer-source" dangerouslySetInnerHTML={{ __html: highlightedText }} />
+          : null}
       </div>
       
       
