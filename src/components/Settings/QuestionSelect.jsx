@@ -6,7 +6,7 @@ import usePost from "../../hooks/usePost";
 
 const QuestionSelect = ({ mqlist, config, setAnswer, setMQlist, setLoading }) => {
     
-    const { data, error, isLoading, post } = usePost('http://cvpr.kumoh.ac.kr/rag/chatbot/api/MQ_send');
+    const { data, error, isLoading, post } = usePost('http://cvpr.kumoh.ac.kr/rag2/chatbot/api/MQ_send');
     const [selected, setSelected] = useState([1, 1, 1, 1, 1]);
     
     useEffect(() => {

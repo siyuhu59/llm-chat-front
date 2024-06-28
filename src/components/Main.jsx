@@ -13,7 +13,7 @@ import * as S from "../styles/main.style";
 
 const Main = ({config, setQuestion, setFirstAnswer, hide, answer, secondLoading}) => {
 
-  const { data, error, isLoading, post } = usePost('http://cvpr.kumoh.ac.kr/rag/chatbot/api/question_button');
+  const { data, error, isLoading, post } = usePost('http://cvpr.kumoh.ac.kr/rag2/chatbot/api/question_button');
 
   const [messages, setMessages] = useState([]);
 

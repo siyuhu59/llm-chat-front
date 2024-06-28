@@ -13,7 +13,7 @@ const FileUpload = ({ maxFiles, maxSize, setFileNames }) => {
     formData.append('file', file); // 'file' 대신 서버에서 요구하는 필드명 사용
 
     try {
-      const response = await fetch('http://cvpr.kumoh.ac.kr/rag/chatbot/api/uploadfile', {
+      const response = await fetch('http://cvpr.kumoh.ac.kr/rag2/chatbot/api/uploadfile', {
         method: 'POST',
         body: formData,
         credentials: 'include',  // This ensures cookies are sent with the request
