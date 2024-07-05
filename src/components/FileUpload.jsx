@@ -4,6 +4,8 @@ import * as S from "../styles/fileUpload.style"
 
 import download from "../assets/images/download.png"
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const FileUpload = ({ maxFiles, maxSize }) => {
   const [files, setFiles] = useState([{ name: 'kit01.pdf' }]);
   const [selectedFiles, setSelectedFiles] = useState([1]);
@@ -53,7 +55,7 @@ const FileUpload = ({ maxFiles, maxSize }) => {
 
 
   const downloadFile = async (name) => {
-    const response = await fetch('http://cvpr.kumoh.ac.kr/rag/chatbot/api/hitrule');
+    const response = await fetch(`${API_URL}/hitrule`);
     const blob = await response.blob();
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');

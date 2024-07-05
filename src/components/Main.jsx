@@ -8,10 +8,12 @@ import Loading from "./Loading";
 
 import * as S from "../styles/main.style";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const Main = ({apiKey, model}) => {
 
   const [inputValue, setInputValue] = useState("");
-  const { data, error, isLoading, post } = usePost('http://cvpr.kumoh.ac.kr/rag/chatbot/api/question_button2');
+  const { data, error, isLoading, post } = usePost(`${API_URL}/question_button2`);
   const [postBody, setPostBody] = useState({
     llm: "ollama",
     question: "",
