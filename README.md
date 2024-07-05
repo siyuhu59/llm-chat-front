@@ -31,4 +31,7 @@ npm run build
 npx serve -s build
 ```
 
+## 실행 결과 예시화면
+![실행결과](run_result.png)
+
 
